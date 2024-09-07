@@ -1,0 +1,14 @@
+
+*.pyc
+__pycache__/
+*.log
+
+*.sqlite3
+*.env
+credentials.json
+token.json
+
+venv/
+env/
+
+.DS_Store
