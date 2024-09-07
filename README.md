@@ -86,6 +86,8 @@ python manage.py runserver
   "password": "sua_senha"
 }
 ```
+![](images/imagem1.png)
+
 *A resposta incluirá um access token e um refresh token.*
 ### 2. Usar o Token para Acessar Endpoints Protegidos
 *Inclua o token no cabeçalho Authorization das suas requisições para acessar os endpoints protegidos.*
@@ -93,8 +95,9 @@ python manage.py runserver
 ```
 Authorization: Bearer <seu_access_token>
 ```
+![](images/imagem2.png)
 ### 3. Atualizar o Token de Acesso
-*Quando o access token expirar, use o refresh token para obter um novo ou também poderá realizar um novo POST de acesso para gerar novo token:*
+*Quando o access token expirar, use o *refresh token* para obter um novo ou também poderá realizar um novo POST de acesso para gerar novo token:*
 
 -Endpoint: `http://127.0.0.1:8000/api/token/refresh/`
 
@@ -106,6 +109,7 @@ Authorization: Bearer <seu_access_token>
   "refresh": "<seu_refresh_token>"
 }
 ```
+![](images/imagem3.png)
 ### Testes com Insomnia
 *Aqui estão as etapas para testar a API usando o Insomnia:*
 # 1. Criar uma Tarefa (POST)
@@ -125,6 +129,10 @@ Authorization: Bearer <seu_access_token>
   "time": "10:00:00"
 }
 ```
+*Além de trazer o post realizado, com a integração ao google calendar será atualizado no calendário, em primeiro acesso será direcionado para login em conta google, garanta de logar na conta de usuário teste adicionada na configuração google cloud informada anteriormente*
+![](images/imagem5.png)
+*Exemplo de caso tente acessar sem token de access ou com token expirado ira obter este retorno*
+![](images/imagem4.png)
 # 2. Listar Tarefas (GET)
 
 -Endpoint: `http://127.0.0.1:8000/api/api_restful/`
@@ -132,6 +140,7 @@ Authorization: Bearer <seu_access_token>
 -Método: GET
 
 -Cabeçalhos: Adicionar o cabeçalho `Authorization: Bearer <seu_access_token>` 
+![](images/imagem6.png)
 # 3. Buscar Tarefa por ID (GET)
 
 -Endpoint: `http://127.0.0.1:8000/api/api_restful/{id}/`
@@ -139,6 +148,7 @@ Authorization: Bearer <seu_access_token>
 -Método: GET
 
 -Cabeçalhos: Adicionar o cabeçalho `Authorization: Bearer <seu_access_token>`
+![](images/imagem7.png)
 # 4. Atualizar Tarefa (PUT ou PATCH)
 
 -Endpoint: `http://127.0.0.1:8000/api/api_restful/{id}/`
@@ -153,6 +163,7 @@ Authorization: Bearer <seu_access_token>
   "title": "Atualizar Tarefa"
 }
 ```
+![](images/imagem8.png)
 # 5. Excluir Tarefa (DELETE)
 
 -Endpoint: `http://127.0.0.1:8000/api/api_restful/{id}/`
@@ -160,6 +171,7 @@ Authorization: Bearer <seu_access_token>
 -Método: DELETE
 
 -Cabeçalhos: Adicionar o cabeçalho `Authorization: Bearer <seu_access_token>`
+![](images/imagem9.png)
 
 ### Testes Automatizados (TDD)
 *Para rodar os testes automatizados que foram implementados com pytest, siga os passos:*
@@ -167,6 +179,7 @@ Authorization: Bearer <seu_access_token>
 *Rode os testes TDD que verificam as funcionalidades do CRUD e integração com Google Calendar:*
 `pytest`
 *Se tudo estiver configurado corretamente, você verá a mensagem de sucesso indicando que os testes passaram.*
+![](images/imagem10.png)
 ### Considerações Finais
 ***Esta API Restful foi desenvolvida com foco em facilitar o gerenciamento de tarefas, utilizando o Google Calendar para integração de eventos e protegendo endpoints sensíveis com JWT. O sistema foi desenvolvido utilizando boas práticas como TDD (Test-Driven Development) para garantir sua estabilidade.***
 # Autor
