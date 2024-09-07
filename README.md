@@ -50,6 +50,8 @@ pip install -r requirements.txt
 3. Ative a **Google Calendar API** buscando em **APIs e Serviços>Biblioteca**.
 4. Crie **credenciais OAuth 2.0**(em credencias>+ criar credenciais) e baixe o arquivo e renomei para `credentials.json`.
 5. Coloque o arquivo `credentials.json` na raiz do projeto, ao lado do arquivo `manage.py`.
+6. Em **Tela de permissão OAuth** selecione usuário externo, preencha os campos obrigatiorios e adicione um usuario de preferencia o e-mail da conta google que ira usar para autenticação.
+7. (foi escolhido usuário externo a fim de praticidade e devido ser preciso workspace para interno)
 
 *5- Coloque o arquivo credentials.json na raiz do projeto, ao lado do arquivo manage.py.*
 ## 5. Configurar o Banco de Dados
