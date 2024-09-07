@@ -1,18 +1,36 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
+from django.contrib.auth.models import User
 from .models import api_restful
 
 class TaskAPITestCase(APITestCase):
 
     def setUp(self):
-        # Dados de teste
+        # Cria um usuário de teste
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+
+        # Faz login e obtém o token de acesso JWT
+        login_response = self.client.post(reverse('token_obtain_pair'), {
+            'username': 'testuser',
+            'password': 'testpassword'
+        }, format='json')
+
+        # Verifica se o login foi bem-sucedido
+        self.assertEqual(login_response.status_code, status.HTTP_200_OK)
+        self.access_token = login_response.data['access']
+
+        # Adiciona o token JWT no cabeçalho de autenticação
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
+
+        # Dados de exemplo para criar uma tarefa
         self.task_data = {
             'title': 'Task Test',
             'description': 'Test Description',
             'date': '2024-09-15',
             'time': '10:00:00'
         }
+        # Cria uma tarefa de exemplo no banco de dados para os testes de leitura, atualização e exclusão
         self.task = api_restful.objects.create(**self.task_data)
 
     def test_create_task(self):
